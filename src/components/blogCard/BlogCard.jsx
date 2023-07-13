@@ -2,14 +2,48 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+
+const ListPosts = () => {
+  const [blogs, setBlogs] = useState([])
+  
+  useEffect(() => {
+    async function fetchBlog() {
+        const res = await fetch('https://swim-blog.vercel.app/api/blog/')
+        return res.json()
+
+    }
+    const list = fetchBlog()
+    setBlogs(list)
+}, [])
+  //console.log(blogs)
+return (
+  <div className='py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 grid gap-3 grid-cols-3'>
+        {blogs?.length > 0 ? (
+          blogs.map(blog => <BlogCard key={blog._id} blog={blog} />)
+        ) : (
+          <h3 className=''>No blogs are currently in the</h3>
+        )}
+      </div>
+)
+}
 
 
-const BlogCard = ({
-  blog: { title, desc, imageUrl, likes, authorId, _id }
-}) => {
+const BlogCard = ({blog: { title, desc, imageUrl, likes, authorId, _id }}) => {
   const isLiked = true
 
+  
+
+
+/*
+<div className='py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 grid gap-3 grid-cols-3'>
+        {blogs?.length > 0 ? (
+          blogs.map(blog => <BlogCard key={blog._id} blog={blog} />)
+        ) : (
+          <h3 className=''>No blogs are currently in the</h3>
+        )}
+      </div>
+*/
 
   return (
     <div className='max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 content-center'>
@@ -46,9 +80,10 @@ const BlogCard = ({
             />
           </svg>
         </Link>
+        <p>{likes}</p>
       </div>
     </div>
   )
 }
 
-export default BlogCard
+export default ListPosts
