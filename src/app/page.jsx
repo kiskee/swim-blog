@@ -15,12 +15,11 @@ export default async function Home() {
 
   return (
    <div className={classes.container}>
-    {blogs?.length > 0 && <h2>WebDevMania&apos;s Blog Website</h2>}
+    <h2>SVG-NAT</h2>
      <div className={classes.wrapper}>
-      {blogs?.length > 0 
-       ? blogs.map((blog) => (
+      {blogs.map((blog) => (
         <BlogCard key={blog._id} blog={blog}/>
-      )) : <h3 className={classes.noBlogs}>No blogs are currently in the</h3>}
+      ))}
      </div>
    </div>
   )
