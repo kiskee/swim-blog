@@ -7,7 +7,7 @@ const page = ()=>{
 
   return (
     <>
-      <ListPosts/>
+      <BlogCard/>
     </>
   )
 }
