@@ -13,7 +13,7 @@ const BlogCard = ({ blog: { title, desc, imageUrl, likes, authorId, _id } }) => 
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
-        <Link className={classes.imgContainer} href='/'>
+        <Link className={classes.imgContainer} href={`/blog/${_id}`}>
           <Image src={imageUrl} width="350" height="350" />
         </Link>
         <div className={classes.blogData}>
